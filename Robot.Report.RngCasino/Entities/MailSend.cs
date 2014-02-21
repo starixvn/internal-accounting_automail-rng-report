@@ -1,15 +1,15 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="MailSend.cs" company="">
+// <copyright file="MailSend.cs" company="Nexcel">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
 
-using System.Net.Mail;
-
 namespace Robot.Report.RngCasino.Entities
 {
+    using System.Net.Mail;
+
     /// <summary>
-    /// TODO: Update summary.
+    /// TODO: Email detail.
     /// </summary>
     public class MailSend
     {

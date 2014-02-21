@@ -1,17 +1,25 @@
-﻿
+﻿// -----------------------------------------------------------------------
+// <copyright file="FileHelper.cs" company="Nexcel">
+// TODO: Steven.Nguyen
+// </copyright>
+
 namespace Robot.Report.RngCasino.Helper
 {
     using System;
     using System.IO;
+
+    /// <summary>
+    /// File Extension.
+    /// </summary>
     public class FileHelper
     {
-        public static void WriteFile(string sContent)
+        /// <summary>
+        /// Writes the file.
+        /// </summary>
+        /// <param name="content">The content to write log.</param>
+        public static void WriteFile(string content)
         {
-
             string logPath = AppDomain.CurrentDomain.BaseDirectory;
-
-            //get the folder that's in
-
             var outPath = string.Format(@"{0}\Logs\Error", logPath);
 
             if (!Directory.Exists(outPath))
@@ -24,7 +32,7 @@ namespace Robot.Report.RngCasino.Helper
             var fs = new FileStream(outPath, FileMode.Append, FileAccess.Write);
             var sw = new StreamWriter(fs);
 
-            sw.WriteLine(DateTime.Now + ": " + sContent);
+            sw.WriteLine(DateTime.Now + ": " + content);
 
             sw.Close();
             fs.Close();
