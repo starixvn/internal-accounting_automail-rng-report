@@ -81,9 +81,7 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WindowsService.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="WindowsService.cs" />
     <Compile Include="WindowsService.Designer.cs">
       <DependentUpon>WindowsService.cs</DependentUpon>
     </Compile>

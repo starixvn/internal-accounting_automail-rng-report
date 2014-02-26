@@ -17,7 +17,7 @@ namespace Robot.Report.RngCasinoService
     /// <summary>
     /// Control start stop process class.
     /// </summary>
-    partial class WindowsService : ServiceBase
+    partial class WindowsService : System.ServiceProcess.ServiceBase
     {
         private static System.Timers.Timer timer;
 
