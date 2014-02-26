@@ -33,8 +33,8 @@ namespace Robot.Report.RngCasino.Business
             try
             {
                 customerCriteria.SentTime = sentTime;
-                customerCriteria.Amount = winlostMYR;
-                customerCriteria.Hours = duration;
+                customerCriteria.WinLoss = winlostMYR;
+                customerCriteria.Duration = duration;
                
                 var rowData = this.GetReportData<dynamic>(customerCriteria);
                 if (rowData != null)
@@ -68,7 +68,7 @@ namespace Robot.Report.RngCasino.Business
         /// </summary>
         /// <param name="duration">Period time to calculate win loss.</param>
         /// <param name="sentTime">Content of mail.</param>
-        /// <param name="winlostMYR">Win loss.</param>
+        /// <param name="winlostMYR">Win loss in Base Currency.</param>
         /// <param name="subject">Subject of mail.</param>
         /// <param name="title">Title of mail.</param>
         /// <param name="mailTo">Address mail of received person.</param>

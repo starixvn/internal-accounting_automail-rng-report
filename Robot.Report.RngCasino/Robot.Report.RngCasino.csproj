@@ -70,9 +70,9 @@
     <Compile Include="Criteria\CustomerWinLossCriteria.cs" />
     <Compile Include="Entities\MailAttachment.cs" />
     <Compile Include="Entities\MailSend.cs" />
-    <Compile Include="Entities\Match.cs" />
     <Compile Include="Entities\UserInfo.cs" />
     <Compile Include="Helper\Implement\FileHelper.cs" />
+    <Compile Include="Helper\Implement\NumberExtension.cs" />
     <Compile Include="Helper\Interface\IServiceBase.cs" />
     <Compile Include="Helper\Implement\LogHelper.cs" />
     <Compile Include="Helper\Implement\EmailHelper.cs" />

@@ -25,9 +25,6 @@ namespace Robot.Report.RngCasino.Helper.Implement
             DynamicRepository = repository ?? new DynamicRepository();
         }
 
-        /// <summary>
-        ///  Gets dynamic repository.
-        /// </summary>
         protected IDynamicRepository Repository
         {
             get
@@ -65,8 +62,10 @@ namespace Robot.Report.RngCasino.Helper.Implement
             }
             catch (Exception ex)
             {
-                return null;
+                HandleException(ex);
             }
+
+            return null;
         }
     }
 }

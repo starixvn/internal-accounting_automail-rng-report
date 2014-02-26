@@ -1,4 +1,4 @@
-﻿
+﻿@using Robot.Report.RngCasino.Helper.Implement
 <div>
     <div>
         Dear All,<br /> <br/>
@@ -35,7 +35,7 @@
             @foreach (var customer in @Model)
             {   
                 <tr style="height: 25px;">
-                    <td align="right" style="width: 40px">
+                    <td align="center" style="width: 40px">
                         @customer.Index
                     </td>
                     <td align="center" width="150px">
@@ -45,10 +45,10 @@
                         @customer.Agency
                     </td>
                     <td align="right" style="width: 150px">
-                        @customer.WinlossMYR
+                        @NumberExtension.WinLossFormat(@customer.WinlossMYR, 2)
                     </td>
                     <td align="right" style="width: 220px">
-                       @customer.Winloss
+                       @NumberExtension.WinLossFormat(@customer.Winloss, 2)
                     </td>
                 </tr>
             }

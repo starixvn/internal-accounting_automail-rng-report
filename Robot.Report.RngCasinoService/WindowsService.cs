@@ -27,7 +27,7 @@ namespace Robot.Report.RngCasinoService
 
         protected override void OnStart(string[] args)
         {
-            var interval =Converter.ToInt(ConfigurationManager.AppSettings["interval"]) * 60 * 60 * 1000; 
+            var interval = Converter.ToInt(ConfigurationManager.AppSettings["interval"]) * 60 * 60 * 1000; 
             timer = new Timer();
             timer.Interval = interval;
             timer.Elapsed += new ElapsedEventHandler(OnInterval);

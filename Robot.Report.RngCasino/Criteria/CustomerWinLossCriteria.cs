@@ -18,10 +18,10 @@ namespace Robot.Report.RngCasino.Criteria
         public DateTime SentTime { get; set; }
 
         [SpParam(SqlParamName = "amount")]
-        public decimal Amount { get; set; }
+        public decimal WinLoss { get; set; }
 
         [SpParam(SqlParamName = "hours")]
-        public int Hours { get; set; }
+        public int Duration { get; set; }
 
         public override bool IsValid()
         {
