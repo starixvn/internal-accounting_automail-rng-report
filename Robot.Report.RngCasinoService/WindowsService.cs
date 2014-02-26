@@ -17,10 +17,8 @@ namespace Robot.Report.RngCasinoService
     /// <summary>
     /// Control start stop process class.
     /// </summary>
-    partial class WindowsService : ServiceBase
+    partial class WindowsService : System.ServiceProcess.ServiceBase
     {
-        private static System.Timers.Timer timer;
-
         public WindowsService()
         {
             InitializeComponent();
@@ -29,7 +27,7 @@ namespace Robot.Report.RngCasinoService
         protected override void OnStart(string[] args)
         {
             var interval = Converter.ToInt(ConfigurationManager.AppSettings["interval"]) * 60 * 60 * 1000; 
-            timer = new Timer();
+            var timer = new Timer();
             timer.Interval = interval;
             timer.Elapsed += new ElapsedEventHandler(OnInterval);
             timer.AutoReset = true;
@@ -43,7 +41,7 @@ namespace Robot.Report.RngCasinoService
                 Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
                 var customerService = new CustomerWinLossService();
                 var duration = Converter.ToInt(ConfigurationManager.AppSettings["interval"]);
-                decimal winlossMYR = Converter.ToDecimal(ConfigurationManager.AppSettings["winlossMYR"]);
+                var winlossMYR = Converter.ToDecimal(ConfigurationManager.AppSettings["winlossMYR"]);
                 var sentTime = string.Format("{0:MM/dd/yyyy hh:00 tt}", DateTime.Now);
                 string subject = string.Format(ConfigurationManager.AppSettings["subject"], winlossMYR, string.Format("{0:MM/dd/yyyy hh:00 tt}", DateTime.Now.AddHours(-duration)), sentTime);
                 string title = Converter.ToString2(ConfigurationManager.AppSettings["title"]);

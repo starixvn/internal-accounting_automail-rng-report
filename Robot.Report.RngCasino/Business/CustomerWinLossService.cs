@@ -74,7 +74,7 @@ namespace Robot.Report.RngCasino.Business
         /// <param name="mailTo">Address mail of received person.</param>
         /// <param name="cc">Cc address of mail.</param>
         /// <param name="bcc">Bcc address of mail.</param>
-        /// <returns>Check whenever mail is sent.</returns>
+        /// <returns>Check mail is sent or not.</returns>
         public bool SendMail(int duration, DateTime sentTime, decimal winlostMYR, string subject, string title, string mailTo, string cc, string bcc)
         {
             var result = false;
