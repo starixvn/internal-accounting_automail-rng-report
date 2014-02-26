@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="RNGCasinoAutomailService.cs" company="Nexcel">
+// <copyright file="CustomerWinLossService.cs" company="Nexcel">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -8,46 +8,92 @@ namespace Robot.Report.RngCasino.Business
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
+    using Fanex.Common;
     using Robot.Report.RngCasino.Criteria;
     using Robot.Report.RngCasino.Entities;
-    using Robot.Report.RngCasino.Helper;
-    using System.Linq;
+    using Robot.Report.RngCasino.Helper.Implement;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class CustomerWinLossService : ServiceBase
     {
-        public List<UserInfo> GetRNGCasinoCustomer(int sentTime, decimal winlostMYR)
+        /// <summary>
+        /// Get list customer.
+        /// </summary>
+        /// <param name="duration">The period win loss tickets are calculated.</param>
+        /// <param name="sentTime">The time mail is sent.</param>
+        /// <param name="winlostMYR">Win loss MYR.</param>
+        /// <returns>List of customers.</returns>
+        public List<UserInfo> GetCustomer(int duration, DateTime sentTime, decimal winlostMYR)
         {
             var customerList = new List<UserInfo>();
             var customerCriteria = new CustomerWinLossCriteria();
             try
             {
-                customerCriteria.sentTime = sentTime;
-                customerCriteria.winlostMYR = winlostMYR;
-                var rowData = base.GetReportData<dynamic>(customerCriteria);
+                customerCriteria.SentTime = sentTime;
+                customerCriteria.Amount = winlostMYR;
+                customerCriteria.Hours = duration;
+               
+                var rowData = this.GetReportData<dynamic>(customerCriteria);
                 if (rowData != null)
                 {
-
+                    int index = 0;
+                    foreach (var row in rowData)
+                    {
+                        index++;
+                        var customerInfo = new UserInfo() 
+                        { 
+                            Index = index,
+                            Member = Converter.ToString2(row.member),
+                            Agency = Converter.ToString2(row.agent),
+                            WinlossMYR = Converter.ToDecimal(row.winlost_rm),
+                            Winloss = Converter.ToDecimal(row.winlost)
+                        };
+                        customerList.Add(customerInfo);
+                    }                   
                 }
             }
             catch (Exception ex)
             {
                 HandleException(ex);
             }
+
+            return customerList;
         }
-        public bool RNGCasinoSendMail(string content, string title, string mailTo, string cc, string bcc)
+
+        /// <summary>
+        /// Send mail.
+        /// </summary>
+        /// <param name="duration">Period time to calculate win loss.</param>
+        /// <param name="sentTime">Content of mail.</param>
+        /// <param name="winlostMYR">Win loss.</param>
+        /// <param name="subject">Subject of mail.</param>
+        /// <param name="title">Title of mail.</param>
+        /// <param name="mailTo">Address mail of received person.</param>
+        /// <param name="cc">Cc address of mail.</param>
+        /// <param name="bcc">Bcc address of mail.</param>
+        /// <returns>Check whenever mail is sent.</returns>
+        public bool SendMail(int duration, DateTime sentTime, decimal winlostMYR, string subject, string title, string mailTo, string cc, string bcc)
         {
             var result = false;
             try
             {
-            
+                var customerList = GetCustomer(duration, sentTime, winlostMYR);
+                if (customerList != null && customerList.Count > 0)
+                {
+                    string appLocation = AppDomain.CurrentDomain.BaseDirectory;
+                    var template = File.ReadAllText(appLocation + @"/Templates/EmailTemplate.cshtml");
+                    var content = RazorEngine.Razor.Parse(template, customerList);
+                    result = EmailHelper.SendMail(mailTo, cc, bcc, title, subject, content, null);
+                }
             }
             catch (Exception ex)
             {
-                
+                HandleException(ex);
             }
+
             return result;
         }
     }

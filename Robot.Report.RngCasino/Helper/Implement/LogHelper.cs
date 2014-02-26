@@ -2,7 +2,7 @@
 // <copyright file="LogHelper.cs" company="Nexcel">
 // TODO: Steven.Nguyen
 // </copyright>
-namespace Robot.Report.RngCasino.Helper
+namespace Robot.Report.RngCasino.Helper.Implement
 {
     using System;
     using Fanex.Logging;

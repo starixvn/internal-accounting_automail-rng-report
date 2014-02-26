@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Robot.Report.RngCasino.Business
+namespace Robot.Report.RngCasino.Helper.Interface
 {
     using System;
     using System.Collections.Generic;

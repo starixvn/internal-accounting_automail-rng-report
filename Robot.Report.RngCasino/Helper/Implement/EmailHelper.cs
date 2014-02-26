@@ -1,7 +1,7 @@
 ﻿// <copyright file="EmailHelper.cs" company="Nexcel">
 // TODO: Mapping Application setting to class
 // </copyright>
-namespace Robot.Report.RngCasino.Helper
+namespace Robot.Report.RngCasino.Helper.Implement
 {
     using System;
     using System.Collections.Generic;

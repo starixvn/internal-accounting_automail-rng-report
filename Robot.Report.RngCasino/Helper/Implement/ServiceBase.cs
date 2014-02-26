@@ -4,13 +4,14 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Robot.Report.RngCasino.Business
+namespace Robot.Report.RngCasino.Helper.Implement
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using Fanex.Common.Helper;
     using Fanex.NAP.Framework.Data;
+    using Robot.Report.RngCasino.Helper;
+    using Robot.Report.RngCasino.Helper.Interface;
 
     /// <summary>
     /// TODO: Update summary.
@@ -25,33 +26,34 @@ namespace Robot.Report.RngCasino.Business
         }
 
         /// <summary>
-        ///  Get dynamic repository
+        ///  Gets dynamic repository.
         /// </summary>
         protected IDynamicRepository Repository
         {
-            get { return DynamicRepository; }
+            get
+            { 
+                return DynamicRepository; 
+            }
         }
 
         /// <summary>
-        /// Handler Exception
+        /// Handler Exception.
         /// </summary>
-        /// <param name="ex"></param>
+        /// <param name="ex">Type exception.</param>
         public void HandleException(Exception ex)
         {
-            //LogService.Error(ex.Message, ex);
-            LogHandler.Log(ex);
+            LogHelper.Log(ex);
         }
 
         /// <summary>
-        /// Get Report Data with Criteria
+        /// Get Report Data with Criteria.
         /// </summary>
-        /// <typeparam name="T">Type of Object return</typeparam>
-        /// <param name="criteria">Criteria to Query DB</param>
-        /// <returns>Enumerable of Type T</returns>
+        /// <typeparam name="T">Type of Object return.</typeparam>
+        /// <param name="criteria">Criteria to Query DB.</param>
+        /// <returns>Enumerable of Type T.</returns>
         public virtual IEnumerable<T> GetReportData<T>(ICriteria criteria)
         {
             Check.Argument.IsNotNull(criteria, "criteria");
-
             try
             {
                 if (criteria.IsValid())
@@ -63,7 +65,6 @@ namespace Robot.Report.RngCasino.Business
             }
             catch (Exception ex)
             {
-                //HandleException(ex);
                 return null;
             }
         }
