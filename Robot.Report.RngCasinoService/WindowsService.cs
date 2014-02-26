@@ -13,6 +13,7 @@ namespace Robot.Report.RngCasinoService
     using Robot.Report.RngCasino.Business;
     using System;
     using Robot.Report.RngCasino.Helper.Implement;
+    using Robot.Report.RngCasino.Configuration;
 
     /// <summary>
     /// Control start stop process class.
@@ -26,7 +27,7 @@ namespace Robot.Report.RngCasinoService
 
         protected override void OnStart(string[] args)
         {
-            var interval = Converter.ToInt(ConfigurationManager.AppSettings["interval"]) * 60 * 60 * 1000; 
+            var interval = AppSetting.TimeInterval * 60 * 60 * 1000; 
             var timer = new Timer();
             timer.Interval = interval;
             timer.Elapsed += new ElapsedEventHandler(OnInterval);
@@ -40,14 +41,14 @@ namespace Robot.Report.RngCasinoService
             {
                 Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
                 var customerService = new CustomerWinLossService();
-                var duration = Converter.ToInt(ConfigurationManager.AppSettings["interval"]);
-                var winlossMYR = Converter.ToDecimal(ConfigurationManager.AppSettings["winlossMYR"]);
+                var duration = AppSetting.TimeInterval;
+                var winlossMYR = AppSetting.WinLossMYR;
                 var sentTime = string.Format("{0:MM/dd/yyyy hh:00 tt}", DateTime.Now);
-                string subject = string.Format(ConfigurationManager.AppSettings["subject"], winlossMYR, string.Format("{0:MM/dd/yyyy hh:00 tt}", DateTime.Now.AddHours(-duration)), sentTime);
-                string title = Converter.ToString2(ConfigurationManager.AppSettings["title"]);
-                string mailTo = ConfigurationManager.AppSettings["to"];
-                string cc = ConfigurationManager.AppSettings["cc"];
-                string bcc = ConfigurationManager.AppSettings["bcc"];
+                string subject = string.Format(EmailSetting.Subject, winlossMYR, string.Format("{0:MM/dd/yyyy hh:00 tt}", DateTime.Now.AddHours(-duration)), sentTime);
+                string title = EmailSetting.Title;
+                string mailTo = EmailSetting.To;
+                string cc = EmailSetting.Cc;
+                string bcc = EmailSetting.Bcc;
                 customerService.SendMail(duration, Converter.ToDateTime(sentTime), winlossMYR, subject, title, mailTo, cc, bcc);
             }
             catch (Exception ex)

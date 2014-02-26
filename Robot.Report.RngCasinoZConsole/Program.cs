@@ -3,6 +3,7 @@ using Robot.Report.RngCasino.Business;
 using System.Configuration;
 using Fanex.Common;
 using System;
+using Robot.Report.RngCasino.Configuration;
 namespace Robot.Report.RngCasino.ConsoleTest
 {
     class Program
@@ -11,16 +12,16 @@ namespace Robot.Report.RngCasino.ConsoleTest
         {
             Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
             var customerService = new CustomerWinLossService();
-            var duration = Converter.ToInt(ConfigurationManager.AppSettings["interval"]);
+            var duration = AppSetting.TimeInterval;
             var sentTime = Converter.ToDateTime("02/20/2014 15:00");
             
             //var sentTime = string.Format("{0:MM/dd/yyyy h:00 tt}", DateTime.Now);
-            decimal winlossMYR = Converter.ToDecimal(ConfigurationManager.AppSettings["winlossMYR"]);
-            string subject = string.Format(ConfigurationManager.AppSettings["subject"], winlossMYR, string.Format("{0:MM/dd/yyyy hh:00 tt}", DateTime.Now.AddHours(-duration)), sentTime);
-            string title = Converter.ToString2(ConfigurationManager.AppSettings["title"]);
-            string mailTo = ConfigurationManager.AppSettings["to"];
-            string cc = ConfigurationManager.AppSettings["cc"];
-            string bcc = ConfigurationManager.AppSettings["bcc"];
+            decimal winlossMYR = AppSetting.WinLossMYR;
+            string subject = string.Format(EmailSetting.Subject, winlossMYR, string.Format("{0:MM/dd/yyyy hh:00 tt}", DateTime.Now.AddHours(-duration)), sentTime);
+            string title = EmailSetting.Title;
+            string mailTo = EmailSetting.To;
+            string cc = EmailSetting.Cc;
+            string bcc = EmailSetting.Bcc;
             customerService.SendMail(duration, sentTime, winlossMYR, subject, title, mailTo, cc, bcc);
         }
     }
