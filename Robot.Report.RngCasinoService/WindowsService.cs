@@ -12,6 +12,7 @@ namespace Robot.Report.RngCasinoService
     using Fanex.Common;
     using Robot.Report.RngCasino.Business;
     using System;
+    using Robot.Report.RngCasino.Helper.Implement;
 
     /// <summary>
     /// Control start stop process class.
@@ -37,17 +38,24 @@ namespace Robot.Report.RngCasinoService
 
         private static void OnInterval(object source, ElapsedEventArgs e)
         {
-            Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
-            var customerService = new CustomerWinLossService();
-            var duration = Converter.ToInt(ConfigurationManager.AppSettings["interval"]);
-            decimal winlossMYR = Converter.ToDecimal(ConfigurationManager.AppSettings["winlossMYR"]);
-            var sentTime = string.Format("{0:MM/dd/yyyy hh:00 tt}", DateTime.Now);
-            string subject = string.Format(ConfigurationManager.AppSettings["subject"], winlossMYR, string.Format("{0:MM/dd/yyyy hh:00 tt}", DateTime.Now.AddHours(-duration)), sentTime);
-            string title = Converter.ToString2(ConfigurationManager.AppSettings["title"]);
-            string mailTo = ConfigurationManager.AppSettings["to"];
-            string cc = ConfigurationManager.AppSettings["cc"];
-            string bcc = ConfigurationManager.AppSettings["bcc"];
-            customerService.SendMail(duration, Converter.ToDateTime(sentTime), winlossMYR, subject, title, mailTo, cc, bcc);
+            try
+            {
+                Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
+                var customerService = new CustomerWinLossService();
+                var duration = Converter.ToInt(ConfigurationManager.AppSettings["interval"]);
+                decimal winlossMYR = Converter.ToDecimal(ConfigurationManager.AppSettings["winlossMYR"]);
+                var sentTime = string.Format("{0:MM/dd/yyyy hh:00 tt}", DateTime.Now);
+                string subject = string.Format(ConfigurationManager.AppSettings["subject"], winlossMYR, string.Format("{0:MM/dd/yyyy hh:00 tt}", DateTime.Now.AddHours(-duration)), sentTime);
+                string title = Converter.ToString2(ConfigurationManager.AppSettings["title"]);
+                string mailTo = ConfigurationManager.AppSettings["to"];
+                string cc = ConfigurationManager.AppSettings["cc"];
+                string bcc = ConfigurationManager.AppSettings["bcc"];
+                customerService.SendMail(duration, Converter.ToDateTime(sentTime), winlossMYR, subject, title, mailTo, cc, bcc);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Log(ex);
+            }
          }
 
         protected override void OnStop()
