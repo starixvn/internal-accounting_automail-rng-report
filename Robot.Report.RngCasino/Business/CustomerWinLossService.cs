@@ -39,13 +39,10 @@ namespace Robot.Report.RngCasino.Business
                 var rowData = this.GetReportData<dynamic>(customerCriteria);
                 if (rowData != null)
                 {
-                    int index = 0;
                     foreach (var row in rowData)
                     {
-                        index++;
                         var customerInfo = new UserInfo() 
                         { 
-                            Index = index,
                             Member = Converter.ToString2(row.member),
                             Agency = Converter.ToString2(row.agent),
                             WinlossMYR = Converter.ToDecimal(row.winlost_rm),

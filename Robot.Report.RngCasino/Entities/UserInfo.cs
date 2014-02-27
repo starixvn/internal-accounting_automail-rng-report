@@ -11,8 +11,6 @@ namespace Robot.Report.RngCasino.Entities
     /// </summary>
     public class UserInfo
     {
-        public int Index { get; set; }
-
         public string Member { get; set; }
 
         public string Agency { get; set; }

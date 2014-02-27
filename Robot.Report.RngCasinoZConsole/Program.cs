@@ -14,10 +14,9 @@ namespace Robot.Report.RngCasino.ConsoleTest
             var customerService = new CustomerWinLossService();
             var duration = AppSetting.TimeInterval;
             var sentTime = Converter.ToDateTime("02/20/2014 15:00");
-            
-            //var sentTime = string.Format("{0:MM/dd/yyyy h:00 tt}", DateTime.Now);
+            const string dateTimeFormat = "{0:MM/dd/yyyy hh:00 tt}";
             decimal winlossMYR = AppSetting.WinLossMYR;
-            string subject = string.Format(EmailSetting.Subject, winlossMYR, string.Format("{0:MM/dd/yyyy hh:00 tt}", DateTime.Now.AddHours(-duration)), sentTime);
+            string subject = string.Format(EmailSetting.Subject, winlossMYR, string.Format(dateTimeFormat, DateTime.Now.AddHours(-duration)), sentTime);
             string title = EmailSetting.Title;
             string mailTo = EmailSetting.To;
             string cc = EmailSetting.Cc;
