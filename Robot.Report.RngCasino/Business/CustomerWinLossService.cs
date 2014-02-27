@@ -26,7 +26,7 @@ namespace Robot.Report.RngCasino.Business
         /// <param name="sentTime">The time mail is sent.</param>
         /// <param name="winlostMYR">Win loss MYR.</param>
         /// <returns>List of customers.</returns>
-        public List<UserInfo> GetCustomer(int duration, DateTime sentTime, decimal winlostMYR)
+        public List<UserInfo> GetCustomerWinLoss(int duration, DateTime sentTime, decimal winlostMYR)
         {
             var customerList = new List<UserInfo>();
             var customerCriteria = new CustomerWinLossCriteria();
@@ -77,7 +77,7 @@ namespace Robot.Report.RngCasino.Business
             var result = false;
             try
             {
-                var customerList = GetCustomer(duration, sentTime, winlostMYR);
+                var customerList = GetCustomerWinLoss(duration, sentTime, winlostMYR);
                 if (customerList != null && customerList.Count > 0)
                 {
                     string appLocation = AppDomain.CurrentDomain.BaseDirectory;
