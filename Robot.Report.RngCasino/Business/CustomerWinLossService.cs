@@ -26,7 +26,7 @@ namespace Robot.Report.RngCasino.Business
         /// <param name="sentTime">The time mail is sent.</param>
         /// <param name="winlostMYR">Win loss MYR.</param>
         /// <returns>List of customers.</returns>
-        public List<UserInfo> GetCustomerWinLoss(DateTime fromDate, DateTime toDate, decimal winlostMYR)
+        public List<UserInfo> GetCustomerWinLoss(DateTime fromDate, DateTime toDate, decimal winlost)
         {
             var customerList = new List<UserInfo>();
             var customerCriteria = new CustomerWinLossCriteria();
@@ -34,7 +34,7 @@ namespace Robot.Report.RngCasino.Business
             {
                 customerCriteria.FromDate = fromDate;
                 customerCriteria.ToDate = toDate;
-                customerCriteria.WinLoss = winlostMYR;
+                customerCriteria.WinLoss = winlost;
                
                 var rowData = this.GetReportData<dynamic>(customerCriteria);
                 if (rowData != null)
@@ -45,7 +45,7 @@ namespace Robot.Report.RngCasino.Business
                         { 
                             Member = Converter.ToString2(row.member),
                             Agency = Converter.ToString2(row.agent),
-                            WinlossMYR = Converter.ToDecimal(row.winlost_rm),
+                            WinlossBaseCurrency = Converter.ToDecimal(row.winlost_rm),
                             Winloss = Converter.ToDecimal(row.winlost)
                         };
                         customerList.Add(customerInfo);

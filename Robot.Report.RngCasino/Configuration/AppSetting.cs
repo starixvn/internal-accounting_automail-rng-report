@@ -16,9 +16,14 @@ namespace Robot.Report.RngCasino.Configuration
             get { return Fanex.Common.Converter.ToInt(System.Configuration.ConfigurationManager.AppSettings["TimeInterval"]); }
         }
 
-        public static decimal WinLossMYR
+        public static decimal WinLoss
         {
-            get { return Fanex.Common.Converter.ToDecimal(System.Configuration.ConfigurationManager.AppSettings["WinLossMYR"]); }
+            get { return Fanex.Common.Converter.ToDecimal(System.Configuration.ConfigurationManager.AppSettings["WinLoss"]); }
+        }
+
+        public static string BaseCurrency
+        {
+            get { return Fanex.Common.Converter.ToString2(System.Configuration.ConfigurationManager.AppSettings["BaseCurrency"]); }
         }
 
         public static bool Testing
