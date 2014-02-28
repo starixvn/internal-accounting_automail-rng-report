@@ -12,16 +12,12 @@ namespace Robot.Report.RngCasino.ConsoleTest
         {
             Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
             var customerService = new CustomerWinLossService();
-            var duration = AppSetting.TimeInterval;
-            var sentTime = Converter.ToDateTime("02/20/2014 15:00");
+            var winlossMYR = AppSetting.WinLossMYR;
             const string dateTimeFormat = "{0:MM/dd/yyyy hh:00 tt}";
-            decimal winlossMYR = AppSetting.WinLossMYR;
-            string subject = string.Format(EmailSetting.Subject, winlossMYR, string.Format(dateTimeFormat, DateTime.Now.AddHours(-duration)), sentTime);
-            string title = EmailSetting.Title;
-            string mailTo = EmailSetting.To;
-            string cc = EmailSetting.Cc;
-            string bcc = EmailSetting.Bcc;
-            customerService.SendMail(duration, sentTime, winlossMYR, subject, title, mailTo, cc, bcc);
+            var toDate = string.Format(dateTimeFormat, DateTime.Now);
+            var fromDate = string.Format(dateTimeFormat, DateTime.Now.AddMinutes(-AppSetting.TimeInterval));
+            string subject = string.Format(EmailSetting.Subject, winlossMYR, fromDate, toDate);
+            customerService.SendMail(Converter.ToDateTime(fromDate), Converter.ToDateTime(toDate), winlossMYR, subject, EmailSetting.Title, EmailSetting.To, EmailSetting.Cc, EmailSetting.Bcc);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Robot.Report.RngCasinoService
         protected override void OnStart(string[] args)
         {
             var timer = new Timer();
-            var interval = AppSetting.TimeInterval * 60 * 60 * 1000;
+            var interval = AppSetting.TimeInterval * 60 * 1000;
             timer.Interval = interval;
             timer.Elapsed += new ElapsedEventHandler(OnInterval);
             timer.AutoReset = true;
@@ -42,11 +42,11 @@ namespace Robot.Report.RngCasinoService
                 Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
                 var customerService = new CustomerWinLossService();
                 var winlossMYR = AppSetting.WinLossMYR;
-                var duration = AppSetting.TimeInterval;
                 const string dateTimeFormat = "{0:MM/dd/yyyy hh:00 tt}";
-                var sentTime = string.Format(dateTimeFormat, DateTime.Now);
-                string subject = string.Format(EmailSetting.Subject, winlossMYR, string.Format(dateTimeFormat, DateTime.Now.AddHours(-duration)), sentTime);
-                customerService.SendMail(duration, Converter.ToDateTime(sentTime), winlossMYR, subject, EmailSetting.Title, EmailSetting.To, EmailSetting.Cc, EmailSetting.Bcc);
+                var toDate = string.Format(dateTimeFormat, DateTime.Now);
+                var fromDate = string.Format(dateTimeFormat, DateTime.Now.AddMinutes(-AppSetting.TimeInterval));
+                string subject = string.Format(EmailSetting.Subject, winlossMYR, fromDate, toDate);
+                customerService.SendMail(Converter.ToDateTime(fromDate), Converter.ToDateTime(toDate), winlossMYR, subject, EmailSetting.Title, EmailSetting.To, EmailSetting.Cc, EmailSetting.Bcc);
             }
             catch (Exception ex)
             {

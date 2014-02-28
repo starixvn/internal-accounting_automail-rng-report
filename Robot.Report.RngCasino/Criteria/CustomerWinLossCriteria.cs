@@ -14,14 +14,14 @@ namespace Robot.Report.RngCasino.Criteria
     /// </summary>
     public class CustomerWinLossCriteria : CriteriaBase
     {
-        [SpParam(SqlParamName = "senttime")]
-        public DateTime SentTime { get; set; }
+        [SpParam(SqlParamName = "fromdate")]
+        public DateTime FromDate { get; set; }
 
         [SpParam(SqlParamName = "amount")]
         public decimal WinLoss { get; set; }
 
-        [SpParam(SqlParamName = "hours")]
-        public int Duration { get; set; }
+        [SpParam(SqlParamName = "todate")]
+        public DateTime ToDate { get; set; }
 
         public override bool IsValid()
         {

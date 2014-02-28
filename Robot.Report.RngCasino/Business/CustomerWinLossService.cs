@@ -26,15 +26,15 @@ namespace Robot.Report.RngCasino.Business
         /// <param name="sentTime">The time mail is sent.</param>
         /// <param name="winlostMYR">Win loss MYR.</param>
         /// <returns>List of customers.</returns>
-        public List<UserInfo> GetCustomerWinLoss(int duration, DateTime sentTime, decimal winlostMYR)
+        public List<UserInfo> GetCustomerWinLoss(DateTime fromDate, DateTime toDate, decimal winlostMYR)
         {
             var customerList = new List<UserInfo>();
             var customerCriteria = new CustomerWinLossCriteria();
             try
             {
-                customerCriteria.SentTime = sentTime;
+                customerCriteria.FromDate = fromDate;
+                customerCriteria.ToDate = toDate;
                 customerCriteria.WinLoss = winlostMYR;
-                customerCriteria.Duration = duration;
                
                 var rowData = this.GetReportData<dynamic>(customerCriteria);
                 if (rowData != null)
@@ -72,12 +72,12 @@ namespace Robot.Report.RngCasino.Business
         /// <param name="cc">Cc address of mail.</param>
         /// <param name="bcc">Bcc address of mail.</param>
         /// <returns>Check mail is sent or not.</returns>
-        public bool SendMail(int duration, DateTime sentTime, decimal winlostMYR, string subject, string title, string mailTo, string cc, string bcc)
+        public bool SendMail(DateTime fromDate, DateTime toDate, decimal winlostMYR, string subject, string title, string mailTo, string cc, string bcc)
         {
             var result = false;
             try
             {
-                var customerList = GetCustomerWinLoss(duration, sentTime, winlostMYR);
+                var customerList = GetCustomerWinLoss(fromDate, toDate, winlostMYR);
                 if (customerList != null && customerList.Count > 0)
                 {
                     string appLocation = AppDomain.CurrentDomain.BaseDirectory;
