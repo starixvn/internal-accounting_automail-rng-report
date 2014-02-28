@@ -42,7 +42,7 @@ namespace Robot.Report.RngCasinoService
                 Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
                 var customerService = new CustomerWinLossService();
                 var winlossMYR = AppSetting.WinLossMYR;
-                const string dateTimeFormat = "{0:MM/dd/yyyy hh:00 tt}";
+                const string dateTimeFormat = "{0:MM/dd/yyyy hh:mm tt}";
                 var toDate = string.Format(dateTimeFormat, DateTime.Now);
                 var fromDate = string.Format(dateTimeFormat, DateTime.Now.AddMinutes(-AppSetting.TimeInterval));
                 string subject = string.Format(EmailSetting.Subject, winlossMYR, fromDate, toDate);
