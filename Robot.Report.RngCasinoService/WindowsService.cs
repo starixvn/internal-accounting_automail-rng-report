@@ -27,6 +27,7 @@ namespace Robot.Report.RngCasinoService
 
         protected override void OnStart(string[] args)
         {
+            Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
             var timer = new Timer();
             var interval = AppSetting.TimeInterval * 60 * 1000;
             timer.Interval = interval;
@@ -39,7 +40,6 @@ namespace Robot.Report.RngCasinoService
         {
             try
             {
-                Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
                 var customerService = new CustomerWinLossService();
                 var winloss = AppSetting.WinLoss;
                 const string dateTimeFormat = "{0:MM/dd/yyyy hh:mm tt}";

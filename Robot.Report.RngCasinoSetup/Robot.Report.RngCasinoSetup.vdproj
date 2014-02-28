@@ -1376,7 +1376,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Robot.Report.RngCasinoSetup"
         "ProductCode" = "8:{64B4D2E3-8B15-4F83-A16B-A70BED6B1F24}"
-        "PackageCode" = "8:{C8986A3B-7E9A-4FCA-BFDB-C8A4BDFEA928}"
+        "PackageCode" = "8:{9AEF30DE-D063-487F-8D0A-62BF68BF0048}"
         "UpgradeCode" = "8:{7C637F6B-659A-4253-9D79-A922F131341B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
