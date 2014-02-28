@@ -72,12 +72,12 @@ namespace Robot.Report.RngCasino.Business
         /// <param name="cc">Cc address of mail.</param>
         /// <param name="bcc">Bcc address of mail.</param>
         /// <returns>Check mail is sent or not.</returns>
-        public bool SendMail(DateTime fromDate, DateTime toDate, decimal winlostMYR, string subject, string title, string mailTo, string cc, string bcc)
+        public bool SendMail(DateTime fromDate, DateTime toDate, decimal winlost, string subject, string title, string mailTo, string cc, string bcc)
         {
             var result = false;
             try
             {
-                var customerList = GetCustomerWinLoss(fromDate, toDate, winlostMYR);
+                var customerList = GetCustomerWinLoss(fromDate, toDate, winlost);
                 if (customerList != null && customerList.Count > 0)
                 {
                     string appLocation = AppDomain.CurrentDomain.BaseDirectory;
