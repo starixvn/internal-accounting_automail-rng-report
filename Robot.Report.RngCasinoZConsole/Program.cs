@@ -14,7 +14,7 @@ namespace Robot.Report.RngCasino.ConsoleTest
             Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
             var customerService = new CustomerWinLossService();
             var winloss = AppSetting.WinLoss;
-            const string dateTimeFormat = "{0:MM/dd/yyyy hh:mm tt}";
+            const string dateTimeFormat = "{0:yyyy-MM-dd HH:mm}";
             var toDate = string.Format(dateTimeFormat, DateTime.Now);
             var fromDate = string.Format(dateTimeFormat, DateTime.Now.AddMinutes(-AppSetting.TimeInterval));
             string subject = string.Format(EmailSetting.Subject, AppSetting.BaseCurrency, NumberExtension.WinLossFormat(winloss, 0), fromDate, toDate);

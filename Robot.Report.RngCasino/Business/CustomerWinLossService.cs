@@ -13,6 +13,7 @@ namespace Robot.Report.RngCasino.Business
     using Robot.Report.RngCasino.Criteria;
     using Robot.Report.RngCasino.Entities;
     using Robot.Report.RngCasino.Helper.Implement;
+    using RemotingRef;
 
     /// <summary>
     /// TODO: Update summary.
@@ -32,6 +33,7 @@ namespace Robot.Report.RngCasino.Business
             var customerCriteria = new CustomerWinLossCriteria();
             try
             {
+                var currencyList = GetCurrencyList();
                 customerCriteria.FromDate = fromDate;
                 customerCriteria.ToDate = toDate;
                 customerCriteria.WinLoss = winlost;
@@ -41,10 +43,13 @@ namespace Robot.Report.RngCasino.Business
                 {
                     foreach (var row in rowData)
                     {
+                        
                         var customerInfo = new UserInfo() 
                         { 
                             Member = Converter.ToString2(row.member),
                             Agency = Converter.ToString2(row.agent),
+                            Currency = Converter.ToInt(row.currency),
+                            CurrencyName = currencyList[Converter.ToInt(row.currency)],
                             WinlossBaseCurrency = Converter.ToDecimal(row.winlost_rm),
                             Winloss = Converter.ToDecimal(row.winlost)
                         };
@@ -92,6 +97,28 @@ namespace Robot.Report.RngCasino.Business
             }
 
             return result;
+        }
+
+        public Dictionary<int, string> GetCurrencyList()
+        {
+            var currencyCriteria = new GetCurrencyListCriteria();
+            var currencyList = new Dictionary<int, string>();
+            try
+            {
+                var rowData = this.GetReportData<dynamic>(currencyCriteria);
+                if (rowData != null)
+                {
+                    foreach (var row in rowData)
+                    {
+                        currencyList.Add(Converter.ToInt(row.exchangeid), Converter.ToString2(row.currency));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+            return currencyList;
         }
     }
 }

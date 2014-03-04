@@ -52,6 +52,9 @@
     <Reference Include="RazorEngine">
       <HintPath>..\_Dependencies\RazorEngine.dll</HintPath>
     </Reference>
+    <Reference Include="RemotingRef">
+      <HintPath>..\_Dependencies\RemotingRef.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -68,6 +71,8 @@
     <Compile Include="Configuration\AppSetting.cs" />
     <Compile Include="Configuration\EmailSetting.cs" />
     <Compile Include="Criteria\CustomerWinLossCriteria.cs" />
+    <Compile Include="Criteria\GetCurrencyListCriteria.cs" />
+    <Compile Include="Entities\Currency.cs" />
     <Compile Include="Entities\MailAttachment.cs" />
     <Compile Include="Entities\MailSend.cs" />
     <Compile Include="Entities\UserInfo.cs" />

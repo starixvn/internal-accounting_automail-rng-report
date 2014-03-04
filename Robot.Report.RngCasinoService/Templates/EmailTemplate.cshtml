@@ -50,7 +50,7 @@
                         @NumberExtension.WinLossFormat(@customer.WinlossBaseCurrency, 2)
                     </td>
                     <td align="right" style="width: 220px">
-                       @NumberExtension.WinLossFormat(@customer.Winloss, 2)
+                       @NumberExtension.WinLossFormat(@customer.Winloss, 2) <span>(@customer.CurrencyName)</span>
                     </td>
                 </tr>
             }

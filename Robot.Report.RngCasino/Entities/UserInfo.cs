@@ -15,6 +15,10 @@ namespace Robot.Report.RngCasino.Entities
 
         public string Agency { get; set; }
 
+        public int Currency { get; set; }
+
+        public string CurrencyName { get; set; }
+
         public decimal WinlossBaseCurrency { get; set; }
 
         public decimal Winloss { get; set; }
