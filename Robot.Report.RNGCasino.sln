@@ -9,6 +9,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Robot.Report.RngCasinoSetup
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robot.Report.RngCasino.ConsoleTest", "Robot.Report.RngCasinoZConsole\Robot.Report.RngCasino.ConsoleTest.csproj", "{04CFDC07-417D-499F-B202-F457C6263DB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing-Sending-Email", "Testing-Sending-Email\Testing-Sending-Email.csproj", "{0609DAF1-A68F-4B3D-BB5A-031DCC5B1B6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,16 @@ Global
 		{04CFDC07-417D-499F-B202-F457C6263DB0}.Release|Mixed Platforms.Build.0 = Release|x86
 		{04CFDC07-417D-499F-B202-F457C6263DB0}.Release|x86.ActiveCfg = Release|x86
 		{04CFDC07-417D-499F-B202-F457C6263DB0}.Release|x86.Build.0 = Release|x86
+		{0609DAF1-A68F-4B3D-BB5A-031DCC5B1B6B}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{0609DAF1-A68F-4B3D-BB5A-031DCC5B1B6B}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{0609DAF1-A68F-4B3D-BB5A-031DCC5B1B6B}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{0609DAF1-A68F-4B3D-BB5A-031DCC5B1B6B}.Debug|x86.ActiveCfg = Debug|x86
+		{0609DAF1-A68F-4B3D-BB5A-031DCC5B1B6B}.Debug|x86.Build.0 = Debug|x86
+		{0609DAF1-A68F-4B3D-BB5A-031DCC5B1B6B}.Release|Any CPU.ActiveCfg = Release|x86
+		{0609DAF1-A68F-4B3D-BB5A-031DCC5B1B6B}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{0609DAF1-A68F-4B3D-BB5A-031DCC5B1B6B}.Release|Mixed Platforms.Build.0 = Release|x86
+		{0609DAF1-A68F-4B3D-BB5A-031DCC5B1B6B}.Release|x86.ActiveCfg = Release|x86
+		{0609DAF1-A68F-4B3D-BB5A-031DCC5B1B6B}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
