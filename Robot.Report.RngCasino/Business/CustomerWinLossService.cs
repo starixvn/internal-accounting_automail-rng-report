@@ -14,6 +14,7 @@ namespace Robot.Report.RngCasino.Business
     using Robot.Report.RngCasino.Entities;
     using Robot.Report.RngCasino.Helper.Implement;
     using RemotingRef;
+    using Robot.Report.RngCasino.Configuration;
 
     /// <summary>
     /// TODO: Update summary.
@@ -85,10 +86,11 @@ namespace Robot.Report.RngCasino.Business
                 var customerList = GetCustomerWinLoss(fromDate, toDate, winlost);
                 if (customerList != null && customerList.Count > 0)
                 {
-                    string appLocation = AppDomain.CurrentDomain.BaseDirectory;
-                    var template = File.ReadAllText(appLocation + @"/Templates/EmailTemplate.cshtml");
-                    var content = RazorEngine.Razor.Parse(template, customerList);
-                    result = EmailHelper.SendMail(mailTo, cc, bcc, title, subject, content, null);
+                    result = SendProblemEmail(customerList, mailTo, cc, bcc, title, subject);
+                }
+                else
+                {
+                    result = SendEmptyEmail(title, mailTo, cc, bcc, fromDate, toDate);
                 }
             }
             catch (Exception ex)
@@ -96,6 +98,30 @@ namespace Robot.Report.RngCasino.Business
                 HandleException(ex);
             }
 
+            return result;
+        }
+
+        private bool SendProblemEmail(List<UserInfo> customerList, string mailTo, string cc, string bcc, string title, string subject)
+        {
+            string appLocation = AppDomain.CurrentDomain.BaseDirectory;
+            var template = File.ReadAllText(appLocation + @"/Templates/EmailTemplate.cshtml");
+            var content = RazorEngine.Razor.Parse(template, customerList);
+            var result = EmailHelper.SendMail(mailTo, cc, bcc, title, subject, content, null);
+
+            return result;
+        }
+
+        // Legacy code by Jacob. Should be reviewed and removed at new code
+        private bool SendEmptyEmail(string title, string mailTo, string cc, string bcc, DateTime fromDate, DateTime toDate)
+        {
+            var winloss = AppSetting.WinLoss;
+            var subject = string.Format(EmailSetting.EmptySubject, AppSetting.BaseCurrency, NumberExtension.WinLossFormat(winloss, 0), fromDate, toDate);
+            
+            string appLocation = AppDomain.CurrentDomain.BaseDirectory;
+            var template = File.ReadAllText(appLocation + @"/Templates/EmptyEmailTemplate.cshtml");
+            var content = RazorEngine.Razor.Parse(template);
+            var result = EmailHelper.SendMail(mailTo, cc, bcc, title, subject, content, null);
+            
             return result;
         }
 
