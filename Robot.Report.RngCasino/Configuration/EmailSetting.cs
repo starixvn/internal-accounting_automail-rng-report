@@ -16,6 +16,11 @@ namespace Robot.Report.RngCasino.Configuration
             get { return System.Configuration.ConfigurationManager.AppSettings["Subject"]; }
         }
 
+        public static string EmptySubject
+        {
+            get { return System.Configuration.ConfigurationManager.AppSettings["EmptySubject"]; }
+        }
+
         public static string Title
         {
             get { return System.Configuration.ConfigurationManager.AppSettings["Title"]; }
